@@ -1,0 +1,36 @@
+﻿@model EMS.Infrastructure.ResultModels.EmployeeResult
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>Update Employee</h3>
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("AddEditEmployee", "Employee", FormMethod.Post))
+        {
+             @Html.HiddenFor(m=>m.Id)
+             <div class="col">
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m=>m.Name,new{ @style="width:100%", type="text" , @class="form-control",name="Name",id="floatingInput",placeholder="Enter Name", required="required" })
+                    <label for="floatingInput">Name</label>
+                    @Html.ValidationMessageFor(model =>model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m=>m.Email,new{ @style="width:100%", type="email" , @class="form-control",name="Email",id="floatingInput",placeholder="Enter Email", required="required" })
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m=>m.DOB,"{0:yyyy-MM-dd}",new{ @style="width:100%", type="date" , @class="form-control",name="DOB",id="floatingInput",placeholder="Enter Date Of Birth", required="required" })
+                    <label for="floatingInput">Date Of Birth</label>
+                </div>
+            </div>
+            <div class="col">
+                @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.Departments, "ID", "Name"),new { @class="form-select" , name="DepartmentId", required="required"})
+            </div>
+            <div class="mt-5">
+                <input type="submit" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>

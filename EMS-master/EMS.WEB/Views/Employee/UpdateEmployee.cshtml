@@ -1,0 +1,40 @@
+﻿@model EMS.Infrastructure.ResultModels.EmployeeResult
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>Update Employee</h3>
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("AddNewEmployee", "Employee", FormMethod.Post))
+        {
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="text" value=@Model.Name class="form-control" name="Name" id="floatingInput" placeholder="Enter Name">
+                    <label for="floatingInput">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" value=@Model.Email class="form-control" name="Email" id="floatingInput" placeholder="Enter Email">
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" value=@Model.DOB class="form-control" name="DOB" id="floatingInput" placeholder="Enter Date Of Birth">
+                    <label for="floatingInput">Date Of Birth</label>
+                </div>
+            </div>
+            <div class="col">
+                @*@Html.DropDownList("Departments",ViewBag.Departments as SelectList)*@
+                <select class="form-select"  name="DepartmentId" aria-label="Default select example">
+                    <option selected>Select DepartMent</option>
+                    <option value="1">HR</option>
+                    <option value="2">Sales</option>
+                    <option value="3">Marketing</option>
+                </select>
+            </div>
+            <div class="mt-5">
+                <input type="submit" class="btn btn-primary"/>
+            </div>
+        }
+    </div>
+</div>

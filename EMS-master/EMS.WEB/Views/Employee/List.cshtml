@@ -1,0 +1,60 @@
+﻿@model IEnumerable<EMS.Infrastructure.ResultModels.EmployeeResult>
+
+@{
+    Layout = "_Layout";
+}
+<div><button type="button" class="btn btn-primary" onclick='window.location = "@Url.Action("AddNewEmployee", "Employee")";'>Add New Employee</button></div>
+<div class="mt-5">
+    <form class="row g-3">
+        <div class="col-auto">
+            <label for="search" class="visually-hidden">Search</label>
+            <input type="text" class="form-control" id="search" placeholder="Search">
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary mb-3" onclick="searchEmployee()">Search</button>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Department</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>@employee.Name</td>
+                        <td>@employee.Email</td>
+                        <td>@employee.DOB.ToString("dddd, dd MMMM yyyy")</td>
+                        <td>@employee.DepartmentName</td>
+                        <td><button type="button" class="btn btn-success" onclick='window.location = "@Url.Action("UpdateEmployee", "Employee", new { id= @employee.Id })";'>Update</button></td>
+                        <td><button type="button" class="btn btn-danger" onclick="deleteEmployee(@employee.Id)">Delete</button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+
+        function deleteEmployee(id) {
+            debugger
+        if (confirm("Are you sure?")) {
+            window.location.href = '/Employee/DeleteEmployee?id=' + id
+        }
+        return false;
+    }
+
+    function searchEmployee() {
+        debugger
+       var searchTerm =document.getElementById("search").value
+       window.location.href = '/Employee/List?search=' + searchTerm
+    }
+</script>
